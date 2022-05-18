@@ -24,12 +24,18 @@ Thank you..... :)
 
 Regards by yours truely \n
 Anirudh S N \n'''
-msg.attach(MIMEText(text))
+
+#sender and reciever
 sender = 'achkerman299@gmail.com'
 reciever='anirudhsn.is19@sahyadri.edu.in'
+
+#start the message building
 email = EmailMessage()
 
 email['From']=sender
 email['To']=reciever
 email['Subject']=subject
-email.set_content()
+email.set_content(msg)
+smtp.send_message(email)
+print(f'Email sent to {reciever}')
+smtp.close()
