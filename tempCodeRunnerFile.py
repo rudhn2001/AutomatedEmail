@@ -1,1 +1,2 @@
-as file :
+
+# file=open('Book1.csv','r')

@@ -22,17 +22,20 @@ def Email_Validate(user_id) :
     
 #function to transfer valid emails from 1 csv files to another
 def valid_Email():
-    file=open('Book1.csv','r')
-    file2=open('Valid_Mail.csv','w')
+
 
     csvFile=csv.reader(file)
     writer= csv.writer(file2)
-
+    
+    for line in csvFile:
+        Email_list.append(line)
+    print("Emails are: ")
+    print(Email_list)
     #for validating the email and storing in another file
-    for email in csvFile:
-        Email=email 
-        if (Email_Validate(Email)==1):
-            writer.writerows(Email)
+    for email in Email_list:
+        type(email)     
+        if (Email_Validate(email)==1):
+            writer.writerows(email)
         else:
             continue
     print("A file named Valid_Mail.csv has been created to store valid emails")
@@ -79,7 +82,10 @@ def auto_Email():
     file.close()
     
 #main function
+Email_list=[]
 print("Starting the program!!!!")
+file=open('Book1.csv','r')
+file2=open('Valid_Mail.csv','w')
 # file=open('Book1.csv','r')
 # file2=open('Valid_Mail.csv','w')
 
