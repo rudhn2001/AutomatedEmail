@@ -15,3 +15,16 @@ file2=open('bm2.csv','w')
 writer= csv.writer(file2)
 writer.writerows(raw)
 file2.close()
+
+    # for line in csvFile:
+    #     Email_list.append(line)
+    # print("Emails are: ")
+    # print(Email_list)
+    # #for validating the email and storing in another file
+    # for email in Email_list:
+    #     type(email)     
+    #     if (Email_Validate(email)==1):
+    #         writer.writerows(email)
+    #     else:
+    #         continue
+    # print("A file named Valid_Mail.csv has been created to store valid emails")

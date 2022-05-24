@@ -9,39 +9,33 @@ from email.message import EmailMessage
 from email.mime.text import MIMEText
 
 
-
-
 #function to validate email
 
 def Email_Validate(user_id) : 
-    pattern= '([a-z 0-9_.+-]+@[a-z 0-9]+\.[a-z 0-9 -.]+)'
+    pattern= '([a-z 0-9_.+-]+@[a-z 0-9]+\.[a-z 0-9 .])'
     if re.search(pattern,user_id): 
         return 1
     else: 
         return 0
     
-#function to transfer valid emails from 1 csv files to another
-def valid_Email():
-    
-
+def Email_Store():
     csvFile=csv.reader(file)
     writer= csv.writer(file2)
+    Email=""
     
-    # for line in csvFile:
-    #     Email_list.append(line)
-    # print("Emails are: ")
-    # print(Email_list)
-    #for validating the email and storing in another file
-    for email in Email_list:
+    for email in csvFile:
         type(email)
-        Email=''.join(email)     
+        Email=''.join(email)
+        print(Email)
         if (Email_Validate(Email)==1):
+            Email_list.append(Email)
             writer.writerows(Email)
         else:
             continue
     print("A file named Valid_Mail.csv has been created to store valid emails")
-
-#function to create and send automated email 
+    
+    
+    
 def auto_Email():
     
     #sender 
@@ -64,13 +58,12 @@ def auto_Email():
     
     
     #opening the CV file to read the emails
-    file=open('Valid_Mail.csv','r')
+    file3=open('Valid_Mail.csv','r')
 
     #Reading a csv file
-    csvFile=csv.reader(file)
-    for reciever in csvFile: 
+    csvFile=csv.reader(file3)
+    for reciever in Email_list: 
         #start the message building
-        
         email = EmailMessage()
         email['From']=sender_mail
         email['To']=reciever
@@ -78,27 +71,14 @@ def auto_Email():
         email.set_content(msg)
         smtp.send_message(email)
         print(f'Email sent to {reciever}')
-        smtp.close()
-        
-    file.close()
-    
-#main function
+    smtp.close()
+
 Email_list=[]
 print("Starting the program!!!!")
 file=open('Book1.csv','r')
 file2=open('Valid_Mail.csv','w')
-# file=open('Book1.csv','r')
-# file2=open('Valid_Mail.csv','w')
-
-# csvFile=csv.reader(file)
-# writer= csv.writer(file2)
-
-#  #for validating the email and storing in another file
-# for Email in csvFile:
-#     st=type(Email)
-# print(st)
-    
-valid_Email()
+Email_Store()
+print(Email_list)
 print("Email's been sorted")
 auto_Email()
 print("Program is done")
